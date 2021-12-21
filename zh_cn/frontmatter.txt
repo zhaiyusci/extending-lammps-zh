@@ -1,0 +1,273 @@
+社区版
+
+编写你自己的源代码扩展和修改 LAMMPS：适应个性化模拟需求的实用指南
+
+Shafat Mubin 博士 | Jichen Li 
+
+由LAMMPS领衔开发者 Steven Plimpton 作序
+
+
+一切赞美归于最仁慈、最亲切的真主安拉。—— Shafat Mubin 博士 
+
+献给所有让世界更美好的的人。—— Jichen Li 
+
+序
+
+许多用户将LAMMPS定位为提供了许许多多功能的计算工具，他们很有可能从来没有读过源代码——当然，这没有错。
+但是如果你想让软件做一些和之前不一样的事，或者你有个对于LAMMPS而言全新的想法，而你又不知从何处下手，或者需要一个施行的大框架。
+是的，这本书就是为你而作。
+
+本书仔细介绍了LAMMPS源代码的结构，如何在源码中找到输入脚本中某一特性所对应的部分（这样你就可以知道LAMMPS具体如何工作），
+以及如何修改LAMMPS，或者为LAMMPS编写新的代码以实现新的选项或者命令。
+在我看来，更为重要的是，本书提供了不同类别（在LAMMPS里被称作*风格*（style））的特性，作为修改、扩展LAMMPS软件的实战演练。
+
+如果你一步一步跟随本书的解释和指导学习下去，你将会对如何推进自己研究中的想法这件事有充分的理解。
+事实上，LAMMPS源代码中有大约95%都是风格，也就是说，这些都是开发者或者用户以相同的习惯和原因加入代码中的。
+他们希望改变现有的模型，打造出一个新的模型，或者测量一个新的性质。
+这是LAMMPS可以不断用于解决新问题的原因。
+
+最后，如果你根据本书提供的方法写了一些新的代码，而且你觉得它对于其他的用户也有用处，
+我希望你能考虑将新代码推送到LAMMPS的Github Repo，这样我们在后续的版本中可以包含这些新功能。
+LAMMPS中的很多新功能就是这样来的。LAMMPS的用户社群就是这样持续帮助代码成长，使LAMMPS变成更加有用的工具。
+
+Steven Plimpton 博士
+
+LAMMPS领衔开发者
+
+贡献者
+
+关于作者
+
+Shafat Mubin博士（物理学博士，宾州）现为瓦尔多斯塔州立大学的助理教授。
+自研究生阶段，他就使用LAMMPS进行分子模拟，研究了多种模拟系统，使用了非常多的技术。
+他在写个性化的代码和扩展LAMMPS方面有丰富的经验，并在自己的网站教授其他用户如何做。
+目前，他的研究兴趣在包括分子模拟在内的计算物理学研究，以及投身于训练本科学生如何运用计算技术来为自己的物理学职业生涯做更好的准备。
+
+我想感谢帮助过我的人，尤其是 Farhana。 
+
+Jichen Li （毕业于青岛科技大学）现为中国科大的硕士研究生。
+他使用LAMMPS来进行分子模拟，以探索高分子微结构和宏观力学以及流变学性质。
+他为LAMMPS开发了数个建模和后处理框架，
+对于LAMMPS的程序架构有通透的理解。
+他致力于从社区学习，并通过他的网站向社区反哺。他为LAMMPS初学者写作了数篇专栏和教程。
+目前，他的工作关注跨尺度模拟和模拟和机器学习的结合。
+
+我感谢我的父母对我的鼓励，Peiyuan Wang对我的支持。以及我的导师Jianhui Song，他带领我进入分子动力学世界。
+
+关于审校
+
+Jie Peng 是美国普渡大学材料科学学院的博士后。is a postdoc from the School of Material Science at Purdue University, US. He 
+has great experience in the area of physics and material engineering. He graduated from 
+the Shanghai Jiao Tong University (China) with a bachelor’s and a master’s degree, and 
+obtained his PhD from the University of Maryland (US) in May 2019. He likes working 
+in interdisciplinary areas where he can see the fundamental science behind materials’ 
+behavior while being able to exploit his knowledge to make use of these materials. 
+He studies the least amount of energy that is transferred in materials – electrons and 
+phonons. The goal is to understand the law of energy transfer at the nanoscale, at which 
+most modern devices operate – cell phones, computers, and so on. 
+
+Shih-Hsien Liu is a postdoctoral research associate at the Center for Molecular Biophysics 
+of Oak Ridge National Laboratory. He is a research professional with a chemical 
+engineering background and has experience in physical and computational chemistry 
+for biological applications. His research interests include drug discovery, bioenergy, 
+nanoscience, and molecular dynamics. He obtained his PhD in computational chemistry 
+from the Pennsylvania State University in 2017, an M.S. in materials chemistry from 
+National Taiwan University in 2010, and a B.S.E. in chemical engineering from National 
+Taiwan University in 2008. 
+
+
+Preface 
+
+LAMMPS is one of the most widely used tools for running simulations for research in 
+molecular dynamics. While the tool itself is fairly easy to use, more often than not, you'll 
+need to customize it to meet your specific simulation requirements. 
+
+Extending and Modifying LAMMPS bridges this learning gap and helps you achieve this 
+by writing custom code to add new features to LAMMPS source code. Written by ardent 
+supporters of LAMMPS, this practical guide will enable you to extend the capabilities 
+of LAMMPS with the help of step-by-step explanations of essential concepts, practical 
+examples, and self-assessment questions. 
+
+Filled with real-world examples, this book teaches you how to find your way around the 
+LAMMPS source code and shows you, in a pragmatic and easily digestible way, how to 
+modify the code to achieve custom simulations for your work. 
+
+This LAMMPS book provides a hands-on approach to implementing associated 
+methodologies that will get you up and running and productive in no time. You'll 
+begin with a short introduction to the internal mechanisms of LAMMPS and gradually 
+transition to an overview of the source code along with a tutorial on modifying it. 
+
+You'll also learn how to identify how LAMMPS input script commands are executed 
+within the source code and understand the architecture of the source code. You'll learn 
+how to modify the source code to implement custom features in LAMMPS, relate source 
+code elements to simulated quantities, and explore pair styles and computes within 
+LAMMPS. You'll also learn how to create various custom fixes to control your simulation 
+using pre-defined criteria. 
+
+As you advance, you'll learn about the structure, syntax, and organization of LAMMPS 
+source code, and will be able to write your own source code extensions to LAMMPS that 
+implement features beyond the ones available in standard downloadable versions. You'll 
+understand how to work with custom solutions for applications on force, thermostats, and 
+pair potentials. 
+
+By the end of this source code book, you'll have learned how to how to add your own 
+extensions and modifications to the LAMMPS source code that can implement features 
+that suit your simulation requirements. 
+
+
+Preface 
+
+Who this book is for 
+
+This book is for students, faculty members, and researchers who are currently using 
+LAMMPS or considering switching to LAMMPS, have a basic knowledge of how to 
+use LAMMPS, and are looking to extend LAMMPS source code for research purposes. 
+This book is not a tutorial on using LAMMPS or writing LAMMPS scripts, and it is 
+assumed that the reader is comfortable with basic LAMMPS syntax. The book is geared 
+toward users with little to no experience in source code editing. Familiarity with C++ 
+programming is helpful but not necessary. 
+
+What this book covers 
+
+Chapter 1, MD Theory and Simulation Practices, briefly introduces fundamental concepts 
+of molecular dynamics, common techniques, and features that will be addressed later in 
+the book to provide a link between theory and simulation. 
+
+Chapter 2, LAMMPS Syntax and Source Code Repository, introduces LAMMPS input 
+script and the execution of MD simulation features through LAMMPS commands and an 
+introduction to the repository of standard LAMMPS code. 
+
+Chapter 3, Source Code Structure and Stages of Execution, introduces the LAMMPS source 
+code format and the sequence of execution followed in a LAMMPS script. 
+
+Chapter 4, Accessing Information by Variables, Arrays, and Methods, describes the elements 
+that store information and perform calculations during a simulation run. 
+
+Chapter 5, Understanding Pair Styles, describes and dissects selected pair styles. 
+
+Chapter 6, Understanding Computes, describes and dissects selected computes. 
+
+Chapter 7, Understanding Fixes, describes and dissects selected fixes. 
+
+Chapter 8, Exploring Supporting Classes, describes and dissects other additional LAMMPS 
+features. 
+
+Chapter 9, Modifying Pair Potentials, discusses the implementation of custom pair styles. 
+
+Chapter 10, Modifying Force Applications, discusses the implementation of custom fix 
+styles to apply forces based on pre-defined criteria. 
+
+Chapter 11, Modifying Thermostats, discusses the implementation of custom fix styles 
+associated with temperature control. 
+
+Appendix A, Building LAMMPS with CMake, introduces LAMMPS compilation using 
+CMake in Linux and Windows. 
+
+
+Preface xi 
+
+Appendix B, Debugging with GDB and Visual Studio Code, introduces debugging tools 
+with applications on understanding bit operations. 
+
+Appendix C, Getting Familiar with MPI, introduces MPI parallel processing. 
+Appendix D, Compatibility with Version 29Oct20, discusses source code differences 
+between stable versions 3Mar20 and 29Oct20. 
+
+Assessments, contains the answers to all the questions from this book. 
+
+To get the most out of this book 
+
+
+If you are using the digital version of this book, we advise you to type the code yourself 
+or access the code via the GitHub repository (link available in the next section). Doing 
+so will help you avoid any potential errors related to the copying and pasting of code. 
+
+Also, we advise that you download the LAMMPS stable version 3Mar20 and have the 
+corresponding files open when viewing the code discussions provided in the book. 
+
+Download the example code files 
+
+
+You can download the example code files for this book from GitHub at https:// 
+github.com/PacktPublishing/Extending-and-Modifying-LAMMPSWriting-
+Your-Own-Source-Code. In case there's an update to the code, it will be 
+updated on the existing GitHub repository. 
+
+We also have other code bundles from our rich catalog of books and videos available 
+at https://github.com/PacktPublishing/. Check them out! 
+
+Download the color images 
+
+We also provide a PDF file that has color images of the screenshots/diagrams used 
+in this book. You can download it here: https://static.packt-cdn.com/ 
+downloads/9781800562264_ColorImages.pdf. 
+
+
+xii Preface 
+
+Conventions used 
+
+There are a number of text conventions used throughout this book. 
+
+Code in text: Indicates code words in text, database table names, folder names, 
+filenames, file extensions, pathnames, dummy URLs, user input, and Twitter handles. 
+Here is an example: "In the single() method, the scalingZ variable is calculated 
+and used to scale the potential before it is returned." 
+
+A block of code is set as follows: 
+
+units metal 
+dimension 3 
+boundary p p p 
+atom_style atomic 
+atom_modify map array 
+
+When we wish to draw your attention to a particular part of a code block, the relevant 
+lines or items are set in bold: 
+
+pair_style tableZ linear 10000 
+pair_coeff 1 1 Table_Potential.table V_Table 12.0 17.0 1.0 
+-0.04 10.0 
+compute TABLE_PE G1 group/group G2 
+variable TABLE_PE equal c_TABLE_PE 
+
+Bold: Indicates a new term, an important word, or words that you see onscreen. 
+For example, words in menus or dialog boxes appear in the text like this. Here is an 
+example: "As you can see, the atoms will cross R_EVAP sequentially and the Fix 
+PrintEvaporate command will be able to register these crossings by printing to file." 
+
+Tips or important notes 
+Appear like this. 
+
+
+Preface xiii 
+
+Get in touch 
+
+Feedback from our readers is always welcome. 
+
+General feedback: If you have questions about any aspect of this book, mention the book 
+title in the subject of your message and email us at customercare@packtpub.com. 
+
+Errata: Although we have taken every care to ensure the accuracy of our content, mistakes 
+do happen. If you have found a mistake in this book, we would be grateful if you would 
+report this to us. Please visit www.packtpub.com/support/errata, selecting your 
+book, clicking on the Errata Submission Form link, and entering the details. 
+
+Piracy: If you come across any illegal copies of our works in any form on the Internet, 
+we would be grateful if you would provide us with the location address or website name. 
+Please contact us at copyright@packt.com with a link to the material. 
+
+If you are interested in becoming an author: If there is a topic that you have expertise 
+in and you are interested in either writing or contributing to a book, please visit 
+authors.packtpub.com. 
+
+Reviews 
+
+Please leave a review. Once you have read and used this book, why not leave a review on 
+the site that you purchased it from? Potential readers can then see and use your unbiased 
+opinion to make purchase decisions, we at Packt can understand what you think about 
+our products, and our authors can see your feedback on their book. Thank you! 
+
+For more information about Packt, please visit packt.com. 
+
