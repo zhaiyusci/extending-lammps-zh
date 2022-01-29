@@ -56,31 +56,24 @@ Jichen Li （毕业于青岛科技大学）现为中国科大的硕士研究生�
 
 关于审校
 
-Jie Peng 是美国普渡大学材料科学学院的博士后。is a postdoc from the School of Material Science at Purdue University, US. He 
-has great experience in the area of physics and material engineering. He graduated from 
-the Shanghai Jiao Tong University (China) with a bachelor’s and a master’s degree, and 
-obtained his PhD from the University of Maryland (US) in May 2019. He likes working 
-in interdisciplinary areas where he can see the fundamental science behind materials’ 
-behavior while being able to exploit his knowledge to make use of these materials. 
-He studies the least amount of energy that is transferred in materials – electrons and 
-phonons. The goal is to understand the law of energy transfer at the nanoscale, at which 
-most modern devices operate – cell phones, computers, and so on. 
+Jie Peng 是美国普渡大学材料科学学院的博士后。
+他在物理和材料工程方面有丰富的经验。
+他在上海交通大学获得了学士和硕士学位，
+在2019年5月美国马里兰大学获得博士学位。
+他喜欢在跨学科领域进行研究工作，这样他可以材料行为背后洞察基础科学，同时又可以用他的知识来利用这些材料。
+他研究材料能量传输的最小单元——电子与声子。
+其研究目标是理解现代设备（例如手机、计算机等）中能量传输在纳米尺度的能量传输规律。
 
-Shih-Hsien Liu is a postdoctoral research associate at the Center for Molecular Biophysics 
-of Oak Ridge National Laboratory. He is a research professional with a chemical 
-engineering background and has experience in physical and computational chemistry 
-for biological applications. His research interests include drug discovery, bioenergy, 
-nanoscience, and molecular dynamics. He obtained his PhD in computational chemistry 
-from the Pennsylvania State University in 2017, an M.S. in materials chemistry from 
-National Taiwan University in 2010, and a B.S.E. in chemical engineering from National 
-Taiwan University in 2008. 
+Shih-Hsien Liu 是橡树岭国家实验室分子生物物理中心的博士后。
+他具有化学工程的研究背景，并且在生物学中应用物理与计算化学中有研究经验。
+他的研究兴趣包括药物发现、生物能源、纳米科学与分子动力学。
+他2017年在宾夕法尼亚州立大学获得计算化学博士学位，2010年在台湾大学获得材料化学硕士学位，2001年在台大获得化学工程学士学位。
 
 
-Preface 
+前言 
 
-LAMMPS is one of the most widely used tools for running simulations for research in 
-molecular dynamics. While the tool itself is fairly easy to use, more often than not, you'll 
-need to customize it to meet your specific simulation requirements. 
+LAMMPS是最为广泛运用的分子动力学模拟工具之一。
+虽然这个工具本身非常容易使用，然而，你经常需要自定义它以满足你独特的模拟需求。
 
 Extending and Modifying LAMMPS bridges this learning gap and helps you achieve this 
 by writing custom code to add new features to LAMMPS source code. Written by ardent 
