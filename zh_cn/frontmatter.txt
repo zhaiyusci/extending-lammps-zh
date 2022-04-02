@@ -75,60 +75,34 @@ Shih-Hsien Liu 是橡树岭国家实验室分子生物物理中心的博士后�
 LAMMPS是最为广泛运用的分子动力学模拟工具之一。
 虽然这个工具本身非常容易使用，然而，你经常需要自定义它以满足你独特的模拟需求。
 
-Extending and Modifying LAMMPS bridges this learning gap and helps you achieve this 
-by writing custom code to add new features to LAMMPS source code. Written by ardent 
-supporters of LAMMPS, this practical guide will enable you to extend the capabilities 
-of LAMMPS with the help of step-by-step explanations of essential concepts, practical 
-examples, and self-assessment questions. 
+扩展与修改LAMMPS 弥合了学习上的鸿沟，帮助你通过编写自定义的代码向LAMMPS软件包中增加新的功能。
+这部指南由CAMMPS的热情支持者撰写，通过一步步的详细解说对核心概念的解释、实例演示和自测问题帮助你获得扩展LAMMPS的能力。
 
-Filled with real-world examples, this book teaches you how to find your way around the 
-LAMMPS source code and shows you, in a pragmatic and easily digestible way, how to 
-modify the code to achieve custom simulations for your work. 
+本书中有丰富的实际案例，书教会你如何在CAMMPS的源码中找到线索，并将展示如何用一种实用的，易于理解的方式向你展示如何修改代码来满足你工作中的个性化需求。
 
-This LAMMPS book provides a hands-on approach to implementing associated 
-methodologies that will get you up and running and productive in no time. You'll 
-begin with a short introduction to the internal mechanisms of LAMMPS and gradually 
-transition to an overview of the source code along with a tutorial on modifying it. 
+这本LAMMPS的书中提供了能够让你立即实现相关方法并且可以立即进行模拟和工作的方式。首先，你会学习到LAMMPS运行的内部机制，然后逐渐向源码的概览过渡，最终掌握修改它的方法。
 
-You'll also learn how to identify how LAMMPS input script commands are executed 
-within the source code and understand the architecture of the source code. You'll learn 
-how to modify the source code to implement custom features in LAMMPS, relate source 
-code elements to simulated quantities, and explore pair styles and computes within 
-LAMMPS. You'll also learn how to create various custom fixes to control your simulation 
-using pre-defined criteria. 
+你也会学到LAMMPS的输入脚本在源码中是如何一步步被执行。理解源码的整体架构。你会学到如何修改
+源码以在LAMMPS中实现个性比的功能、模拟特定性质的代码元素，以及探索LAMPCPS中的粒子对模型和计算。
+你也将学习如何用事先设定的标准来创建多种多样
+的约束条件以控制模拟。
 
-As you advance, you'll learn about the structure, syntax, and organization of LAMMPS 
-source code, and will be able to write your own source code extensions to LAMMPS that 
-implement features beyond the ones available in standard downloadable versions. You'll 
-understand how to work with custom solutions for applications on force, thermostats, and 
-pair potentials. 
+随着你逐步深入，你会学到LAMMPS源码的结构、文法和组织，并且学会写自己的扩展实现标准下载版本中没有的功能。你将了解如何实现自己的力、控温和两体势。
 
-By the end of this source code book, you'll have learned how to how to add your own 
-extensions and modifications to the LAMMPS source code that can implement features 
-that suit your simulation requirements. 
+读毕这本源码书，你会学会如何将自己的模拟需求通过编写LAMMPS扩展、修改LAmmps代码实现出来。
 
-
-Preface 
+本书的目标读者
 
-Who this book is for 
+本书是为目前使用LAMMPS或计划转向使用LAMMPS的师生和研究者撰写的。
+读者应具备如何使用LAMMPS的最基本的知识，并且期望通过扩展LANUPS为研究助力。
 
-This book is for students, faculty members, and researchers who are currently using 
-LAMMPS or considering switching to LAMMPS, have a basic knowledge of how to 
-use LAMMPS, and are looking to extend LAMMPS source code for research purposes. 
-This book is not a tutorial on using LAMMPS or writing LAMMPS scripts, and it is 
-assumed that the reader is comfortable with basic LAMMPS syntax. The book is geared 
-toward users with little to no experience in source code editing. Familiarity with C++ 
-programming is helpful but not necessary. 
+本书不是lAMMPS的使用教程，也并不教如何写LAMMPS输入脚本。我们假定读者习惯LAMMPS的基本语法。
+我们考虑到读者可能并没有编辑源码的经验，熟悉C++编程对阅读本书当然有帮助，但并非必要的。
 
-What this book covers 
+本书的主要内容
 
-Chapter 1, MD Theory and Simulation Practices, briefly introduces fundamental concepts 
-of molecular dynamics, common techniques, and features that will be addressed later in 
-the book to provide a link between theory and simulation. 
-
-Chapter 2, LAMMPS Syntax and Source Code Repository, introduces LAMMPS input 
-script and the execution of MD simulation features through LAMMPS commands and an 
-introduction to the repository of standard LAMMPS code. 
+* 第一章：分子动力学理论与模拟实践，分子动力学中基础概念的简介，通用技术，以及本书以后章节可能会涉及的理论和模拟联系可能涉及的相关知识。
+* 第二章：LAMMPS文法和源码仓库，介绍LAMMPS的输入脚本及通过标准LAMMPS版本执行分子动力学模拟所需的LAMMPS命令。
 
 Chapter 3, Source Code Structure and Stages of Execution, introduces the LAMMPS source 
 code format and the sequence of execution followed in a LAMMPS script. 
